@@ -14,7 +14,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 library(tidyverse);library(lubridate); library(here)
 
 #Read in data, don't convert strings to factors
-sites <- read.csv(here('Data/Raw/NWIS_SiteFlowData_NE_Raw.csv'))
+sites <- read.csv(here('Data/Raw/NWIS_SiteFlowData_NE_RAW.csv'))
 dim(sites)
 
 #Convert date column to date object
@@ -28,17 +28,18 @@ sites$date <- ymd_hms(sites$date)
 ```{r create and explore days of week column}
 
 #Compute the day of the week each sample was collected
-sites$dow <- wday(sites$date)
+sites$dow <- wday(sites$date) #note: wday collects the day of the week and lists it as a numeric value
 
 ## What class is the dow column?
 class(sites$dow)
 
 #List the unique values in the column
-unique(sites$dow)
+unique(sites$dow) #note: here we see that the only days of the week in this dataset are 4, 5, and 3
 
 #Summary - is it meaningful?
 summary(sites$dow)
 
+#note: factors are grouping variables
 ```
 
 ## Convert the days of the week to a factor
